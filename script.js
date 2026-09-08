@@ -161,94 +161,45 @@ document.querySelectorAll(".quick-wishes button").forEach((button) => {
 
 
 // Send WhatsApp wish
+// ================================
+// SEND WEDDING WISH
+// ================================
+
 if (sendWish) {
 
-  sendWish.addEventListener("click", () => {
+  sendWish.addEventListener("click", function () {
 
-    const name =
-      guestName && guestName.value.trim()
-        ? guestName.value.trim()
-        : "A well-wisher";
+    const name = guestName.value.trim() || "A well-wisher";
 
     const message =
-      wishMessage && wishMessage.value.trim()
-        ? wishMessage.value.trim()
-        : "Wishing you both a lifetime filled with love, happiness and togetherness. Congratulations! ❤️";
+      wishMessage.value.trim() ||
+      "Wishing you a lifetime filled with love, happiness and togetherness. Congratulations! ❤️";
 
-    const target = wishTo ? wishTo.value : "both";
+    const target = wishTo.value;
 
-    const createWhatsAppURL = (number, recipient) => {
-
-      const whatsappMessage =
-        `Dear ${recipient},\n\n` +
-        `${message}\n\n` +
-        `With love,\n${name}`;
-
-      return `https://wa.me/${number}?text=${encodeURIComponent(whatsappMessage)}`;
-    };
-
-
-    // =========================
-    // SEND ONLY TO GROOM
-    // =========================
+    let number;
+    let recipient;
 
     if (target === "groom") {
-
-      const url = createWhatsAppURL(
-        WHATSAPP.groom,
-        "Ramachandran G"
-      );
-
-      window.location.href = url;
-      return;
+      number = WHATSAPP.groom;
+      recipient = "Ramachandran G";
+    } else {
+      number = WHATSAPP.bride;
+      recipient = "Monalisa B";
     }
 
+    const whatsappMessage =
+      `Dear ${recipient},\n\n` +
+      `${message}\n\n` +
+      `With love,\n${name}`;
 
-    // =========================
-    // SEND ONLY TO BRIDE
-    // =========================
+    const whatsappURL =
+      "https://wa.me/" +
+      number +
+      "?text=" +
+      encodeURIComponent(whatsappMessage);
 
-    if (target === "bride") {
-
-      const url = createWhatsAppURL(
-        WHATSAPP.bride,
-        "Monalisa B"
-      );
-
-      window.location.href = url;
-      return;
-    }
-
-
-    // =========================
-    // SEND TO BOTH
-    // =========================
-
-    if (target === "both") {
-
-      const groomURL = createWhatsAppURL(
-        WHATSAPP.groom,
-        "Ramachandran G"
-      );
-
-      const brideURL = createWhatsAppURL(
-        WHATSAPP.bride,
-        "Monalisa B"
-      );
-
-
-      // Open groom WhatsApp first
-      window.open(groomURL, "_blank");
-
-
-      // Open bride WhatsApp after a short delay
-      setTimeout(() => {
-
-        window.open(brideURL, "_blank");
-
-      }, 1500);
-
-    }
+    window.location.href = whatsappURL;
 
   });
 
