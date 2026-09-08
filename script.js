@@ -1,103 +1,207 @@
-const loader=document.getElementById("loader");
-const explore=document.getElementById("explore");
-const musicBtn=document.getElementById("musicBtn");
-const audio=document.getElementById("musicAudio");
+const loader = document.getElementById("loader");
+const explore = document.getElementById("explore");
+const musicBtn = document.getElementById("musicBtn");
+const audio = document.getElementById("musicAudio");
 
-window.addEventListener("load",()=>setTimeout(()=>loader.classList.add("hide"),700));
-explore.addEventListener("click",()=>document.querySelector(".welcome").scrollIntoView({behavior:"smooth"}));
+// ================================
+// PAGE LOADER
+// ================================
 
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");obs.unobserve(e.target)}})
-},{threshold:.14});
-document.querySelectorAll(".reveal-section").forEach(x=>obs.observe(x));
+setTimeout(() => {
+  if (loader) {
+    loader.classList.add("hide");
+  }
+}, 1500);
 
-musicBtn.addEventListener("click", async () => {
 
-  try {
+// ================================
+// EXPLORE INVITATION
+// ================================
 
-    if (audio.paused) {
+if (explore) {
+  explore.addEventListener("click", async () => {
 
-      audio.volume = 0.7;
+    // Start music after user taps
+    try {
+      if (audio) {
+        audio.volume = 0.7;
+        await audio.play();
 
-      await audio.play();
+        if (musicBtn) {
+          musicBtn.classList.add("playing");
+          musicBtn.textContent = "♫";
+        }
+      }
+    } catch (error) {
+      console.log("Music could not start:", error);
+    }
 
-      musicBtn.classList.add("playing");
-      musicBtn.textContent = "♫";
+    // Scroll to invitation
+    const welcome = document.querySelector(".welcome");
 
-    } else {
+    if (welcome) {
+      welcome.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  });
+}
 
-      audio.pause();
 
-      musicBtn.classList.remove("playing");
-      musicBtn.textContent = "♪";
+// ================================
+// MUSIC ON / OFF
+// ================================
+
+if (musicBtn) {
+  musicBtn.addEventListener("click", async () => {
+
+    try {
+
+      if (audio.paused) {
+
+        audio.volume = 0.7;
+
+        await audio.play();
+
+        musicBtn.classList.add("playing");
+        musicBtn.textContent = "♫";
+
+      } else {
+
+        audio.pause();
+
+        musicBtn.classList.remove("playing");
+        musicBtn.textContent = "♪";
+
+      }
+
+    } catch (error) {
+
+      console.log("Music error:", error);
 
     }
 
-  } catch (error) {
-
-    console.log("Music error:", error);
-
-  }
-
-});
-explore.addEventListener("click", async () => {
-
-  try {
-
-    audio.volume = 0.7;
-
-    await audio.play();
-
-    musicBtn.classList.add("playing");
-    musicBtn.textContent = "♫";
-
-  } catch (error) {
-
-    console.log("Autoplay blocked:", error);
-
-  }
-
-  // Smoothly scroll to invitation
-  document.querySelector(".welcome").scrollIntoView({
-    behavior: "smooth"
   });
-/*
-  IMPORTANT:
-  Replace these with the real WhatsApp numbers.
-  Country code only, no +, spaces or dashes.
-  Example: India 919876543210
-*/
-const WHATSAPP={
-  groom:"+919150751177",
-  bride:"+919551555093"
+}
+
+
+// ================================
+// SECTION ANIMATIONS
+// ================================
+
+const sections = document.querySelectorAll(".reveal-section");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+
+    entries.forEach((entry) => {
+
+      if (entry.isIntersecting) {
+
+        entry.target.classList.add("visible");
+
+        observer.unobserve(entry.target);
+
+      }
+
+    });
+
+  },
+  {
+    threshold: 0.14
+  }
+);
+
+sections.forEach((section) => {
+  observer.observe(section);
+});
+
+
+// ================================
+// WHATSAPP NUMBERS
+// ================================
+//
+// IMPORTANT:
+// No + sign
+// No spaces
+// No hyphens
+//
+// India country code = 91
+//
+
+const WHATSAPP = {
+  groom: "919150751177",
+  bride: "919551555093"
 };
 
-const guest=document.getElementById("guestName");
-const wishTo=document.getElementById("wishTo");
-const wishMessage=document.getElementById("wishMessage");
-const sendWish=document.getElementById("sendWish");
 
-document.querySelectorAll(".quick-wishes button").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    wishMessage.value=btn.dataset.msg;
-    wishMessage.focus();
+// ================================
+// WEDDING WISHES
+// ================================
+
+const guestName = document.getElementById("guestName");
+const wishTo = document.getElementById("wishTo");
+const wishMessage = document.getElementById("wishMessage");
+const sendWish = document.getElementById("sendWish");
+
+
+// Quick wish buttons
+document.querySelectorAll(".quick-wishes button").forEach((button) => {
+
+  button.addEventListener("click", () => {
+
+    if (wishMessage) {
+      wishMessage.value = button.dataset.msg;
+      wishMessage.focus();
+    }
+
   });
+
 });
 
-sendWish.addEventListener("click",()=>{
-  const name=guest.value.trim()||"A well-wisher";
-  const message=wishMessage.value.trim()||"Wishing you both a lifetime filled with love, happiness and togetherness. Congratulations! ❤️";
-  const target=wishTo.value;
-  let number=WHATSAPP.groom;
-  let recipient="Ramachandran G";
 
-  if(target==="bride"){number=WHATSAPP.bride;recipient="Monalisa B";}
-  if(target==="both"){
-    number=WHATSAPP.groom;
-    recipient="Ramachandran G & Monalisa B";
+// Send WhatsApp wish
+if (sendWish) {
+
+  sendWish.addEventListener("click", () => {
+
+    const name =
+      guestName && guestName.value.trim()
+        ? guestName.value.trim()
+        : "A well-wisher";
+
+    const message =
+      wishMessage && wishMessage.value.trim()
+        ? wishMessage.value.trim()
+        : "Wishing you both a lifetime filled with love, happiness and togetherness. Congratulations! ❤️";
+
+    const target = wishTo ? wishTo.value : "both";
+
+    let number = WHATSAPP.groom;
+    let recipient = "Ramachandran G";
+
+    if (target === "bride") {
+
+      number = WHATSAPP.bride;
+      recipient = "Monalisa B";
+
+    } else if (target === "both") {
+
+      number = WHATSAPP.groom;
+      recipient = "Ramachandran G & Monalisa B";
+
+    }
+
+    const whatsappMessage =
+      `Dear ${recipient},\n\n` +
+      `${message}\n\n` +
+      `With love,\n${name}`;
+
+    const whatsappURL =
+      `https://wa.me/${number}?text=${encodeURIComponent(whatsappMessage)}`;
+
+    window.open(whatsappURL, "_blank");
+
+  });
+
   }
-
-  const text=`Dear ${recipient},%0A%0A${encodeURIComponent(message)}%0A%0AWith love,%0A${encodeURIComponent(name)}`;
-  const url=`https://wa.me/${number}?text=${text}`;
-  window.open(url,"_blank","noopener");
-});
