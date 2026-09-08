@@ -25,8 +25,8 @@ musicBtn.addEventListener("click",async()=>{
   Example: India 919876543210
 */
 const WHATSAPP={
-  groom:"919000000000",
-  bride:"919000000001"
+  groom:"+919150751177",
+  bride:"+919551555093"
 };
 
 const guest=document.getElementById("guestName");
