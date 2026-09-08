@@ -177,31 +177,79 @@ if (sendWish) {
 
     const target = wishTo ? wishTo.value : "both";
 
-    let number = WHATSAPP.groom;
-    let recipient = "Ramachandran G";
+    const createWhatsAppURL = (number, recipient) => {
+
+      const whatsappMessage =
+        `Dear ${recipient},\n\n` +
+        `${message}\n\n` +
+        `With love,\n${name}`;
+
+      return `https://wa.me/${number}?text=${encodeURIComponent(whatsappMessage)}`;
+    };
+
+
+    // =========================
+    // SEND ONLY TO GROOM
+    // =========================
+
+    if (target === "groom") {
+
+      const url = createWhatsAppURL(
+        WHATSAPP.groom,
+        "Ramachandran G"
+      );
+
+      window.location.href = url;
+      return;
+    }
+
+
+    // =========================
+    // SEND ONLY TO BRIDE
+    // =========================
 
     if (target === "bride") {
 
-      number = WHATSAPP.bride;
-      recipient = "Monalisa B";
+      const url = createWhatsAppURL(
+        WHATSAPP.bride,
+        "Monalisa B"
+      );
 
-    } else if (target === "both") {
+      window.location.href = url;
+      return;
+    }
 
-      number = WHATSAPP.groom.bride;
-      recipient = "Ramachandran G & Monalisa B";
+
+    // =========================
+    // SEND TO BOTH
+    // =========================
+
+    if (target === "both") {
+
+      const groomURL = createWhatsAppURL(
+        WHATSAPP.groom,
+        "Ramachandran G"
+      );
+
+      const brideURL = createWhatsAppURL(
+        WHATSAPP.bride,
+        "Monalisa B"
+      );
+
+
+      // Open groom WhatsApp first
+      window.open(groomURL, "_blank");
+
+
+      // Open bride WhatsApp after a short delay
+      setTimeout(() => {
+
+        window.open(brideURL, "_blank");
+
+      }, 1500);
 
     }
 
-    const whatsappMessage =
-      `Dear ${recipient},\n\n` +
-      `${message}\n\n` +
-      `With love,\n${name}`;
-
-    const whatsappURL =
-      `https://wa.me/${number}?text=${encodeURIComponent(whatsappMessage)}`;
-
-    window.open(whatsappURL, "_blank");
-
   });
 
-  }
+}
