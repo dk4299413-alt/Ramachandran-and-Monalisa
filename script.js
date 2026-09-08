@@ -187,7 +187,7 @@ if (sendWish) {
 
     } else if (target === "both") {
 
-      number = WHATSAPP.groom;
+      number = WHATSAPP.groom.bride;
       recipient = "Ramachandran G & Monalisa B";
 
     }
