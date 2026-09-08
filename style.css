@@ -1,0 +1,46 @@
+:root{
+  --cream:#fff8ec;--paper:#fffdf8;--green:#38583b;--green2:#233e2a;
+  --gold:#bd8a2d;--gold2:#e1bd6d;--red:#9f314a;--rose:#c9697c;
+  --ink:#4b3b31;--muted:#806f62;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:Montserrat,sans-serif;overflow-x:hidden}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:30;opacity:.07;background:url("theme.jpg") center/cover;mix-blend-mode:multiply}
+button,input,textarea,select{font:inherit}
+.top-thoranam{position:fixed;z-index:40;top:0;left:0;right:0;height:37px;display:flex;justify-content:space-around;align-items:center;background:rgba(255,248,236,.9);border-bottom:1px solid #d6ba78;color:var(--green);font-size:19px;box-shadow:0 2px 12px #0000000d}
+.loader{position:fixed;z-index:100;inset:0;background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .9s,visibility .9s}
+.loader.hide{opacity:0;visibility:hidden}.loader .lamp{font-size:52px;animation:pulse 1.5s infinite}.loader p{font:600 26px "Noto Sans Tamil";color:var(--red);margin:10px}.loader span{font-size:9px;letter-spacing:2px;color:var(--muted)}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.music{position:fixed;right:16px;top:50px;z-index:50;width:42px;height:42px;border:1px solid #cda85d;border-radius:50%;background:#fff9;backdrop-filter:blur(8px);color:var(--gold);font-size:20px;cursor:pointer}.music.playing{animation:spin 4s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.hero{min-height:100svh;position:relative;display:grid;place-items:center;overflow:hidden;background:url("theme.jpg") center top/cover no-repeat}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,#fff8ec1c 0%,#fff8ec55 48%,#fff8eceb 88%,var(--cream) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:110px 18px 130px;width:min(95%,780px)}
+.lamp-row{font-size:22px;color:var(--gold);margin-bottom:15px}
+.tamil{font:500 15px "Noto Sans Tamil";color:var(--red);margin-bottom:10px}.eyebrow{font-size:9px;letter-spacing:3.5px;font-weight:700;color:var(--green)}
+.intro{font:400 20px "Cormorant Garamond";color:var(--muted);margin-top:24px}
+h1,h2,h3{font-family:"Cormorant Garamond",serif}
+h1{font-size:clamp(55px,14vw,108px);font-weight:500;line-height:.78;color:var(--green2);margin:25px 0;text-shadow:0 5px 22px #5d2a3312}
+h1 span{display:block}h1 em{display:block;font-size:.42em;font-style:normal;color:var(--gold);line-height:1.5}
+.ornament{color:var(--gold);font-size:18px;margin:24px}.hero-copy{font:500 14px/1.9 "Cormorant Garamond";color:var(--muted)}
+.explore{margin-top:30px;border:1px solid #bc8a35;background:#fff9d9b5;color:var(--green2);padding:14px 24px;border-radius:50px;font-size:9px;font-weight:700;letter-spacing:2px;cursor:pointer;backdrop-filter:blur(5px)}
+.explore b{margin-left:12px;color:var(--red);font-size:15px}
+.scroll-bottom{position:absolute;z-index:3;bottom:20px;left:50%;transform:translateX(-50%);font-size:8px;letter-spacing:3px;color:var(--green);white-space:nowrap;animation:bob 1.7s infinite}.scroll-bottom span{display:block;text-align:center;font-size:17px;margin-top:5px}@keyframes bob{50%{transform:translate(-50%,6px)}}
+.kolam{position:absolute;color:#b9904a55;font-size:80px;line-height:.7;z-index:1}.kolam-a{left:7%;top:34%}.kolam-b{right:7%;top:56%}
+.section{position:relative;min-height:88svh;padding:105px 22px;display:grid;place-items:center;overflow:hidden}.section-inner{position:relative;z-index:2;width:min(100%,900px);text-align:center}
+.welcome{background:radial-gradient(circle at 50% 45%,#fff 0,#fff8ec 55%,#f4ead9 100%)}
+.small-tamil{font:500 14px "Noto Sans Tamil";color:var(--red);margin-bottom:13px}
+h2{font-size:clamp(47px,11vw,82px);line-height:.88;font-weight:500;color:var(--green2);margin-top:17px}h2 i{font-weight:400;color:var(--red)}
+.divider{margin:25px auto;color:var(--gold);font-size:20px}.copy{max-width:570px;margin:0 auto;font-size:13px;line-height:2;color:var(--muted)}
+.names{margin:42px auto 0;display:flex;justify-content:center;align-items:center;gap:18px;border-top:1px solid #cdb887;border-bottom:1px solid #cdb887;padding:25px 10px}.names span{font:500 clamp(24px,6vw,42px) "Cormorant Garamond";color:var(--green2)}.names b{color:var(--rose);font-size:18px}
+.banana{position:absolute;font-size:100px;opacity:.18}.banana-left{left:-20px;bottom:10%}.banana-right{right:-20px;top:12%;transform:scaleX(-1)}
+.rituals{background:var(--green2);color:#fff}.rituals h2{color:#fff}.rituals .gold{color:var(--gold2)}.ritual-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:45px}.ritual-grid article{border:1px solid #d6ba7860;padding:28px 15px;background:#ffffff09}.ritual-grid article>div{font-size:31px;margin-bottom:10px}.ritual-grid small{color:var(--gold2);letter-spacing:2px}.ritual-grid h3{font-size:29px;font-weight:500;margin:10px 0;color:#fff}.ritual-grid p{font-size:11px;line-height:1.7;color:#e9e0d5}
+.date-section{background:linear-gradient(#fffdf9e8,#fffdf9e8),url("theme.jpg") center/cover}.date-card{max-width:650px;margin:40px auto 25px;border:1px solid #c8a55e;padding:28px 12px;box-shadow:0 15px 45px #6c4c2412}.date-card span{display:block;font-size:8px;letter-spacing:3px;color:var(--muted)}.date-card strong{display:block;font:600 clamp(31px,8vw,58px) "Cormorant Garamond";color:var(--red);margin:12px 0}
+.location-card{max-width:430px;margin:auto;padding:22px;border-top:1px solid #ddcaa2}.location-card>div{font-size:35px}.location-card h3{font-size:30px;color:var(--green2)}.location-card p{font-size:11px;line-height:1.8;color:var(--muted)}.location-card a{display:inline-block;margin-top:13px;color:var(--green);font-size:9px;font-weight:700;letter-spacing:2px;border-bottom:1px solid var(--gold);padding-bottom:5px}
+.wishes{background:radial-gradient(circle at 50% 15%,#fff 0,#fff8ec 60%,#f2e2d0 100%)}.wish-icon{font-size:40px}.wish-form{width:min(100%,520px);margin:28px auto 18px;display:grid;gap:11px}.wish-form input,.wish-form select,.wish-form textarea{width:100%;border:1px solid #d8c49c;background:#fffdf8;padding:14px;border-radius:4px;outline:none;color:var(--ink);font-size:12px}.wish-form textarea{resize:vertical}.wish-form button{border:0;background:#218c55;color:#fff;padding:15px;border-radius:5px;font-size:10px;letter-spacing:1.6px;font-weight:700;cursor:pointer;box-shadow:0 8px 22px #218c5528}.quick-wishes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}.quick-wishes button{background:#fff;border:1px solid #ddc9a1;color:var(--green2);padding:9px 12px;border-radius:30px;font-size:9px;cursor:pointer}
+.final{min-height:90svh;background:url("theme.jpg") center bottom/cover no-repeat;color:#fff}.final-overlay{position:absolute;inset:0;background:linear-gradient(#24412dbd,#233e2af5)}.final h2{color:#fff}.final-amp{font:italic 34px "Cormorant Garamond";color:var(--gold2);margin:13px}.final p{font:13px/1.8 "Cormorant Garamond";color:#eadfd3}.light{color:var(--gold2)}.light-divider{color:var(--gold2)}.wish-again{margin-top:27px;padding:13px 22px;border:1px solid var(--gold2);background:transparent;color:#fff;border-radius:30px;font-size:9px;letter-spacing:2px}
+footer{text-align:center;padding:28px 10px;background:#eadfce;color:var(--green2);font-size:9px;letter-spacing:2px}footer span{color:var(--red);padding:0 5px}footer small{display:block;margin-top:8px;font:11px "Noto Sans Tamil";color:var(--muted)}
+.reveal{opacity:0;transform:translateY(25px);animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards}.delay1{animation-delay:.2s}.delay2{animation-delay:.35s}.delay3{animation-delay:.55s}.delay4{animation-delay:.8s}.delay5{animation-delay:1s}@keyframes rise{to{opacity:1;transform:none}}
+.reveal-section{opacity:0;transform:translateY(30px);transition:1s ease}.reveal-section.visible{opacity:1;transform:none}
+@media(max-width:650px){.ritual-grid{grid-template-columns:1fr}.ritual-grid article{padding:22px 15px}.names{flex-direction:column;gap:7px}.kolam{font-size:55px}.section{padding-top:95px;padding-bottom:95px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
