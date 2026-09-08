@@ -11,13 +11,56 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:.14});
 document.querySelectorAll(".reveal-section").forEach(x=>obs.observe(x));
 
-musicBtn.addEventListener("click",async()=>{
-  try{
-    if(audio.paused){await audio.play();musicBtn.classList.add("playing");musicBtn.textContent="♫"}
-    else{audio.pause();musicBtn.classList.remove("playing");musicBtn.textContent="♪"}
-  }catch(err){alert("Please keep wedding.mp3 in the same folder as index.html.")}
-});
+musicBtn.addEventListener("click", async () => {
 
+  try {
+
+    if (audio.paused) {
+
+      audio.volume = 0.7;
+
+      await audio.play();
+
+      musicBtn.classList.add("playing");
+      musicBtn.textContent = "♫";
+
+    } else {
+
+      audio.pause();
+
+      musicBtn.classList.remove("playing");
+      musicBtn.textContent = "♪";
+
+    }
+
+  } catch (error) {
+
+    console.log("Music error:", error);
+
+  }
+
+});
+explore.addEventListener("click", async () => {
+
+  try {
+
+    audio.volume = 0.7;
+
+    await audio.play();
+
+    musicBtn.classList.add("playing");
+    musicBtn.textContent = "♫";
+
+  } catch (error) {
+
+    console.log("Autoplay blocked:", error);
+
+  }
+
+  // Smoothly scroll to invitation
+  document.querySelector(".welcome").scrollIntoView({
+    behavior: "smooth"
+  });
 /*
   IMPORTANT:
   Replace these with the real WhatsApp numbers.
